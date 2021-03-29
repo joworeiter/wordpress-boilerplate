@@ -1,7 +1,7 @@
 # WordPress Boilerplate Project
 
 - Author: Johannes Reiter 
-- Contact: [send me a message](johannes@reiter.work)
+- Contact: [send me a message](mailto:johannes@reiter.work)
 
 ## Usage
 
