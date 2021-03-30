@@ -41,7 +41,7 @@ wp config create --dbname=$WP_STAGING_DB_NAME --dbuser=$WP_STAGING_DB_USER --dbp
  * REITER.WORK customs
  */
 define( 'RW_WP_ROOT_DIR', dirname(__FILE__) . '/../../current');
-define( 'RW_WP_ROOT_URL', 'http' . ( $_SERVER['HTTPS'] ? 's' : null ) . '://' . $_SERVER['HTTP_HOST']);
+define( 'RW_WP_ROOT_URL', 'http' . ( \$_SERVER['HTTPS'] ? 's' : null ) . '://' . \$_SERVER['HTTP_HOST']);
 
 define( 'WP_CONTENT_DIR', RW_WP_ROOT_DIR . '/content' );
 define( 'WP_CONTENT_URL', RW_WP_ROOT_URL . '/content' );
