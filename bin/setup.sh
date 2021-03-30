@@ -45,6 +45,7 @@ define( 'RW_WP_ROOT_URL', 'http' . ( \$_SERVER['HTTPS'] ? 's' : null ) . '://' .
 
 define( 'WP_CONTENT_DIR', RW_WP_ROOT_DIR . '/content' );
 define( 'WP_CONTENT_URL', RW_WP_ROOT_URL . '/content' );
+define( 'UPLOADS, 'content/uploads' );
 
 define( 'DISALLOW_FILE_EDIT', true );
 define( 'FORCE_SSL_ADMIN', true );
@@ -83,10 +84,11 @@ wp config create --dbname=$WP_PROD_DB_NAME --dbuser=$WP_PROD_DB_USER --dbpass=$W
  * REITER.WORK customs
  */
 define( 'RW_WP_ROOT_DIR', dirname(__FILE__) . '/../../current');
-define( 'RW_WP_ROOT_URL', 'http' . ( $_SERVER['HTTPS'] ? 's' : null ) . '://' . $_SERVER['HTTP_HOST']);
+define( 'RW_WP_ROOT_URL', 'http' . ( \$_SERVER['HTTPS'] ? 's' : null ) . '://' . \$_SERVER['HTTP_HOST']);
 
 define( 'WP_CONTENT_DIR', RW_WP_ROOT_DIR . '/content' );
 define( 'WP_CONTENT_URL', RW_WP_ROOT_URL . '/content' );
+define( 'UPLOADS, 'content/uploads' );
 
 define( 'DISALLOW_FILE_EDIT', true );
 define( 'FORCE_SSL_ADMIN', true );
