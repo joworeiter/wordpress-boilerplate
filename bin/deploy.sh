@@ -28,6 +28,7 @@ fi
 
 #create new staging
 cp -r $rc $staging/$now
+cd $staging/.. || exit
 rm $staging/../current
 ln -s $staging/$now current
 
@@ -42,7 +43,7 @@ npm run build
 
 rm $production/../current
 cd $production/.. || exit
-ln -s "$(ls -td $production/*/ | head -1)" current
+ln -s $(ls -td $production/*/ | head -1) current
 
 echo 'new version is live'
 echo 'don`t forget to clear caches manually!'

@@ -36,7 +36,7 @@ rm wp-config-sample.php
 cp "$parent_path"/../staging -R "$parent_path"/../production
 
 # create wp-config for STAGING
-wp config create --dbname=$WP_STAGING_DB_NAME --dbuser=$WP_STAGING_DB_USER --dbpass=$WP_STAGING_DB_PWD --dbprefix=$WP_STAGING_DB_PREFIX --skip-check --extra-php <<PHP
+wp config create --dbname=$WP_STAGING_DB_NAME --dbuser=$WP_STAGING_DB_USER --dbpass=$WP_STAGING_DB_PWD --dbhost=$WP_STAGING_HOST --dbprefix=$WP_STAGING_DB_PREFIX --skip-check --extra-php <<PHP
 /**
  * REITER.WORK customs
  */
@@ -45,7 +45,7 @@ define( 'RW_WP_ROOT_URL', 'http' . ( \$_SERVER['HTTPS'] ? 's' : null ) . '://' .
 
 define( 'WP_CONTENT_DIR', RW_WP_ROOT_DIR . '/content' );
 define( 'WP_CONTENT_URL', RW_WP_ROOT_URL . '/content' );
-define( 'UPLOADS, 'content/uploads' );
+define( 'UPLOADS', 'content/uploads' );
 
 define( 'DISALLOW_FILE_EDIT', true );
 define( 'FORCE_SSL_ADMIN', true );
@@ -79,7 +79,7 @@ echo 'created admin user for staging: '$WP_ADMIN_USER'<'$WP_ADMIN_MAIL'>'
 cd ../../production/current || exit
 
 # create wp-config for PRODUCTION
-wp config create --dbname=$WP_PROD_DB_NAME --dbuser=$WP_PROD_DB_USER --dbpass=$WP_PROD_DB_PWD --dbprefix=$WP_PROD_DB_PREFIX --skip-check --extra-php <<PHP
+wp config create --dbname=$WP_PROD_DB_NAME --dbuser=$WP_PROD_DB_USER --dbpass=$WP_PROD_DB_PWD --dbhost=$WP_PROD_HOST --dbprefix=$WP_PROD_DB_PREFIX --skip-check --extra-php <<PHP
 /**
  * REITER.WORK customs
  */
@@ -88,7 +88,7 @@ define( 'RW_WP_ROOT_URL', 'http' . ( \$_SERVER['HTTPS'] ? 's' : null ) . '://' .
 
 define( 'WP_CONTENT_DIR', RW_WP_ROOT_DIR . '/content' );
 define( 'WP_CONTENT_URL', RW_WP_ROOT_URL . '/content' );
-define( 'UPLOADS, 'content/uploads' );
+define( 'UPLOADS', 'content/uploads' );
 
 define( 'DISALLOW_FILE_EDIT', true );
 define( 'FORCE_SSL_ADMIN', true );
