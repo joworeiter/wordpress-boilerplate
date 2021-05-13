@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ wp_title }}</title>
+    <link href="{{ site.theme.link }}/assets/dist/base.css" rel="stylesheet"/>
+
+    {{ wp_head }}
+
+</head>
+<body>
+
+<div id="rvr-page">
+    <header>
+        {% include 'partials/header/header.twig' %}
+    </header>
+    <main>
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    <footer>
+        {% include 'partials/footer.twig' %}
+
+    </footer>
+    {% include 'utils/cookies.twig' %}
+    <script src="{{ site.theme.link }}/assets/dist/index.js"></script>
+    {{ wp_footer }}
+
+
+</div>
+</body>
+</html>

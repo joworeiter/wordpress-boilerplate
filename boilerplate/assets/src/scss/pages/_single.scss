@@ -1,0 +1,40 @@
+.single {
+
+  &__no-gutter {
+    --bs-gutter-x: 0;
+  }
+
+  &__row {
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 4rem;
+    }
+
+  }
+
+  &__image {
+    img {
+      max-width: 100%;
+      height: auto;
+
+      @include media-breakpoint-up(lg) {
+        margin-top: 3rem;
+        box-shadow: 2rem -2rem 0 0 $primary;
+      }
+    }
+  }
+
+  &__headline {
+    margin: 3rem 0;
+  }
+
+  &__copy {
+    background-color: $primary;
+    padding: 3rem 2rem;
+
+    @include media-breakpoint-up(lg) {
+      box-shadow: 20vw 0 0 0 $primary;
+    }
+
+  }
+}

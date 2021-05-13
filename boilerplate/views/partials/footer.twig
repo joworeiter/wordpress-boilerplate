@@ -1,0 +1,40 @@
+{% set menuItems = menu.get_items %}
+
+<div class="footer">
+    <div class="container">
+        <div class="row mb-4">
+
+            {% for menuItem in menuItems %}
+                <div class="col-12 col-md-2">
+                    {% if menuItem.children is not empty %}
+                        <h3 class="footer__headline">{{ menuItem.title }}</h3>
+                        <ul>
+                            {% for subItem in menuItem.children %}
+                                <li>
+                                    <a href="{{ subItem.link }}">{{ subItem.title }} </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <a href="{{ menuItem.link }}">
+                        <h3 class="footer__headline">{{ menuItem.title }}</h3>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col">
+                <span>&copy; {{ now|date('Y') }} - RVR.immo</span>
+            </div>
+            <div class="col text-end">
+                <a href="/impressum/">Impressum</a>
+                <span>|</span>
+                <a href="/datenschutzerklaerung/">Datenschutz</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,11 @@
+{
+    "name": "reiterwork/rvr_2020",
+    "description": "Timber dev stack",
+    "type": "wordpress-theme",
+    "require": {
+        "timber/timber": "^1.18",
+        "djboris88/timber-debugger": "^1.1",
+        "palmiak/timber-acf-wp-blocks": "^1.14"
+    },
+    "license": "MIT"
+}

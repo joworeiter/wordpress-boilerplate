@@ -1,0 +1,111 @@
+.news-teaser {
+
+  margin-bottom: 2rem;
+
+  &__background {
+
+    --size: min(115vh, 600px);
+
+    background-color: $secondary;
+    height: var(--size);
+    width: var(--size);
+    border-radius: 50%;
+    left: calc(var(--size) * -0.5);
+    position: absolute;
+    margin-top: -5rem;
+    z-index: -1;
+
+    @include media-breakpoint-down(lg) {
+      margin-top: -3rem;
+    }
+
+  }
+
+  &__headline {
+    text-align: center;
+    margin: 4rem 0;
+  }
+
+  &__btn {
+    margin-bottom: -1rem;
+  }
+
+  &__card {
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0 1.5rem;
+  }
+
+  &__img-wrapper {
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 213px;
+      object-fit: cover;
+    }
+  }
+
+  &__badge {
+    height: 100px;
+    right: -50px;
+    position: absolute;
+    top: -50px;
+    width: 100px;
+    transform: rotate(45deg);
+
+    span {
+      color: $white;
+      font-size: 0.9rem;
+      top: 77px;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+    }
+
+  }
+
+  &__content {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      font-size: $h4-font-size;
+    }
+
+    p {
+      font-size: $font-size-base;
+    }
+
+    a {
+      margin: 0 auto -1rem;
+    }
+  }
+
+
+  .splide {
+
+    /*alter the pagination, hence, the button got -1 rem bottom margin.*/
+    &__pagination {
+      bottom: -1rem !important;
+    }
+
+    /* add space for overflow button on slide */
+    &__slide {
+      margin-bottom: 2rem;
+    }
+
+    &__arrow--prev {
+      left: 0;
+    }
+
+    &__arrow--next {
+      right: 0;
+    }
+  }
+}

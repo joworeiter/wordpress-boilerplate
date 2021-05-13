@@ -1,0 +1,40 @@
+.blog {
+
+  .nav {
+    background-color: transparent;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    margin: 0;
+    height: unset;
+    border-bottom: 4px solid $secondary;
+  }
+
+  &__btn {
+    background-color: transparent;
+    border: 0;
+    font-family: $btn-font-family;
+    font-size: $font-size-lg;
+
+    &:hover{
+      color: $white;
+      background-color: $primary;
+    }
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, clamp(350px, 33%, 500px));
+    row-gap: 3rem;
+  }
+
+  &__card {
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0 1.5rem;
+  }
+
+}

@@ -1,0 +1,50 @@
+@import "overrides";
+
+/*
+*Bootstrap 5 Beta 1*/
+@import "~bootstrap/scss/bootstrap";
+
+/*
+MMenu 8.5 for mobile menus*/
+@import "~mmenu-js/src/mmenu";
+@import "~mmenu-js/src/variables";
+
+/*
+* base Styles
+*/
+@import "base/typography";
+@import "base/button";
+@import "base/img";
+@import "base/icon";
+@import "base/form";
+@import "base/utility";
+
+/*
+* partials
+*/
+@import "base/partials/footer";
+@import "base/partials/header/header";
+@import "base/partials/header/nav";
+@import "base/partials/claim";
+
+/*
+* blocks
+*/
+@import "blocks/headline";
+@import "blocks/keyVisual";
+@import "blocks/step-component";
+@import "blocks/icon-chooser";
+@import "blocks/contact-information-box";
+@import "blocks/contactForm";
+@import "blocks/mainNews";
+@import "blocks/newsTeaser";
+
+/*
+* pages
+*/
+@import "pages/blog";
+@import "pages/single";
+/*
+* vendor overrides
+*/
+//@import 'vendor/klaro';

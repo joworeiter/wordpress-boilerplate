@@ -1,0 +1,33 @@
+.btn {
+
+  color: $white;
+  min-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+  &-primary {
+    background: $primary;
+  }
+
+  &-secondary {
+    background: $white;
+    border: 3px solid $black-dirty;
+    color: $black-dirty;
+  }
+
+  &-outline {
+
+    &-primary {
+      border: 3px solid $primary;
+      background: rgba(0, 0, 0, 0.1);
+
+
+      &:hover{
+        color: $white;
+      }
+      //TODO add background animation
+    }
+
+  }
+}

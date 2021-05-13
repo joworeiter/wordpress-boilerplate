@@ -50,6 +50,7 @@ define( 'UPLOADS', 'content/uploads' );
 define( 'DISALLOW_FILE_EDIT', true );
 define( 'FORCE_SSL_ADMIN', true );
 define( 'WP_CACHE', false );
+define( 'WP_AUTO_UPDATE_CORE', false );
 
 define('WPLANG', 'de_AT');
 define('WP_DEBUG', true);
@@ -93,6 +94,7 @@ define( 'UPLOADS', 'content/uploads' );
 define( 'DISALLOW_FILE_EDIT', true );
 define( 'FORCE_SSL_ADMIN', true );
 define( 'WP_CACHE', true );
+define( 'WP_AUTO_UPDATE_CORE', false );
 
 define('WPLANG', 'de_AT');
 define('WP_DEBUG', false);

@@ -1,0 +1,21 @@
+@mixin bleed__left($color) {
+
+  box-shadow: -10rem 0 $color;
+  @include media-breakpoint-up(lg){
+    box-shadow: -35rem 0 $color;
+  }
+  @include media-breakpoint-up(xl){
+    box-shadow: -45rem 0 $color;
+  }
+}
+
+@mixin bleed__right($color) {
+
+  box-shadow: 10rem 0 $color;
+  @include media-breakpoint-up(lg){
+    box-shadow: 35rem 0 $color;
+  }
+  @include media-breakpoint-up(xl){
+    box-shadow: 45rem 0 $color;
+  }
+}

@@ -1,0 +1,68 @@
+{#
+Title: News Teaser
+Description: Stellt Blog/News-Beiträge als Teaser dar.
+Category: media
+Icon: format-aside
+PostTypes: page
+Keywords: news teaser
+Mode: edit
+align: false
+#}
+<div class="{{ classes }}" data-{{ block.id }}>
+    <link href="{{ site.theme.link }}/assets/dist/splide.min.css" rel="stylesheet"/>
+
+    {% if fields.background %}
+        <div class="row">
+            <div class="news-teaser__background">
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="staff__background--gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="staff__headline">{{ fields.headline }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="splide" class="splide">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            {% for post in fields.posts %}
+                                {% set categorie = post.categories().1.name | default(post.categories().0.name) | replace({'stufe': '', 'Hochschulvertretung': 'HV'}) %}
+
+
+                                <li class="splide__slide">
+                                    <div class="news-teaser__card">
+                                        <div class="news-teaser__img-wrapper">
+                                            <div class="news-teaser__badge bg--{{ categorie|lower() }}">
+                                               <span>{{ categorie }}</span>
+                                            </div>
+                                            {% set img = post.get_image('post-image') %}
+                                            {% include 'utils/image.twig' with {src: img.src, size: 600, alt: img.alt, title: img.title} %}
+                                        </div>
+                                        <div class="news-teaser__content">
+                                            <h3>
+                                                {{ post.post_title }}
+                                            </h3>
+                                            <p>{{ post.post_excerpt|default( post.get_content(25)) }}</p>
+
+                                        </div>
+                                        <a href="{{ post.link }}" class="btn btn-primary news-teaser__btn">mehr erfahren</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
