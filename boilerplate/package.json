@@ -1,7 +1,7 @@
 {
-  "name": "rvr_2021",
+  "name": "rw_2021",
   "version": "1.0.0",
-  "description": "WordPress Theme für rvr.immo 2021",
+  "description": "WordPress Theme based on Timber",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -12,7 +12,7 @@
   "author": "Johannes Reiter - reiter.work",
   "license": "ISC",
   "devDependencies": {
-    "bootstrap": "^5.0.0-beta3",
+    "bootstrap": "^5.0",
     "browser-sync": "^2.26.13",
     "browser-sync-webpack-plugin": "^2.2.2",
     "cross-env": "^7.0.3",
