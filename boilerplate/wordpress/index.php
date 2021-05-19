@@ -13,12 +13,15 @@ add_filter('upload_mimes', 'cc_mime_types');
 
 //enable menus in theme
 add_theme_support( 'menus' );
+add_theme_support('custom-logo');
 add_action( 'init', 'register_my_menus' );
 
 function register_my_menus() {
     register_nav_menus(
         array(
-            'primary-menu' => __( 'Hauptmenü' )
+            'primary-menu' => __( 'Hauptmenü' ),
+            'footer-quicklinks' => __( 'Quicklinks Footer' ),
+            'footer-legal' => __( 'Legal Footer' )
         ));
 }
 
