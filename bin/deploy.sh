@@ -1,8 +1,9 @@
 #!/bin/bash
 
 numOfBackups=5
-themeName=hpdhl_2020
+themeName=
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )/
+
 production="$parent_path"../production/realeases
 staging="$parent_path"../staging/realeases
 
@@ -25,12 +26,10 @@ then
     exit 1
 fi
 
-
 #create new staging
 cp -r $rc $staging/$now
-cd $staging/.. || exit
 rm $staging/../current
-ln -s $staging/$now current
+ln -s -v $staging/$now $staging/../current
 
 echo 'created new staging env'
 
@@ -42,11 +41,10 @@ echo 'building production assets'
 npm run build
 
 rm $production/../current
-cd $production/.. || exit
-ln -s $(ls -td $production/*/ | head -1) current
+ln -s "$(ls -td $production/*/ | head -1)" $production/../current
 
 echo 'new version is live'
 echo 'don`t forget to clear caches manually!'
 
 #TODO remove Backups if there more than $numOfBackups
-
+#TODO die if no themename
