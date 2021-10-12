@@ -1,14 +1,22 @@
 #!/bin/bash
 
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+#get the root dir - the dir where the staging and production directory is located
+root=$(builtin cd "$parent_path"/..; pwd)
+
 overrides_path=../../shared/overrides
 assets_path=../../../shared/assets
-current_dir_path="$parent_path"/../staging/current
 
-cd "$parent_path" || exit
+env_file="$root"/.env
 
-env_file="$parent_path"/../.env
+if !command -v wp &> /dev/null
+then
+    echo "wp-cli is not installed on the system"
+    echo "Install wp-cli and comeback"
+    exit 1
+fi
 
+exit
 if [ -f $env_file ]
 then
   source $env_file
@@ -18,29 +26,26 @@ then
 fi
 
 # create the staging directories and set proper permissions
-mkdir ../staging
-cd ../staging || exit
-mkdir -p realeases/0_init shared/assets/uploads shared/assets/upgrade shared/overrides/
-chmod 0775 shared/assets/
+mkdir "$root"/staging
+mkdir -p "$root"/staging/releases/0_init "$root"/staging/shared/assets/uploads "$root"/staging/shared/assets/upgrade "$root"/staging/shared/overrides/
+chmod 0775 "$root"/staging/shared/assets/
 find . -type f -exec chmod 664 {} +
-ln -s realeases/0_init current
+ln -s "$root"/staging/releases/0_init "$root"/staging/current
 
-cd ../staging/current || exit
-
-if [ ! -d "$current_dir_path"/wp-admin ]; then
+if [ ! -d "$root"/staging/current/wp-admin ]; then
   wp core download --skip-themes --skip-plugins --locale=$WP_LOCALE
 fi
 
 # copy the staging dir for the production env.
 rm wp-config-sample.php
-cp "$parent_path"/../staging -R "$parent_path"/../production
+cp "$root"/staging -R "$root"/production
 
 # create wp-config for STAGING
 wp config create --dbname=$WP_STAGING_DB_NAME --dbuser=$WP_STAGING_DB_USER --dbpass=$WP_STAGING_DB_PWD --dbhost=$WP_STAGING_HOST --dbprefix=$WP_STAGING_DB_PREFIX --skip-check --extra-php <<PHP
 /**
  * REITER.WORK customs
  */
-define( 'RW_WP_ROOT_DIR', dirname(__FILE__) . '/../../current');
+define( 'RW_WP_ROOT_DIR', dirname(__FILE__, 3) . '/current');
 define( 'RW_WP_ROOT_URL', 'http' . ( \$_SERVER['HTTPS'] ? 's' : null ) . '://' . \$_SERVER['HTTP_HOST']);
 
 define( 'WP_CONTENT_DIR', RW_WP_ROOT_DIR . '/content' );
@@ -77,14 +82,14 @@ wp core install --url=$WP_STAGING_URL --title=$WP_TITLE --admin_user=$WP_ADMIN_U
 
 echo 'created admin user for staging: '$WP_ADMIN_USER'<'$WP_ADMIN_MAIL'>'
 
-cd ../../production/current || exit
+cd "$root"/production/current || exit
 
 # create wp-config for PRODUCTION
 wp config create --dbname=$WP_PROD_DB_NAME --dbuser=$WP_PROD_DB_USER --dbpass=$WP_PROD_DB_PWD --dbhost=$WP_PROD_HOST --dbprefix=$WP_PROD_DB_PREFIX --skip-check --extra-php <<PHP
 /**
  * REITER.WORK customs
  */
-define( 'RW_WP_ROOT_DIR', dirname(__FILE__) . '/../../current');
+define( 'RW_WP_ROOT_DIR', dirname(__FILE__, 3) . '/current');
 define( 'RW_WP_ROOT_URL', 'http' . ( \$_SERVER['HTTPS'] ? 's' : null ) . '://' . \$_SERVER['HTTP_HOST']);
 
 define( 'WP_CONTENT_DIR', RW_WP_ROOT_DIR . '/content' );
@@ -116,6 +121,7 @@ ln -s "$assets_path"/uploads contentuploads
 
 
 # Install WordPress without disclosing admin_password to bash history
+cd "$root"/production
 wp core install --url=$WP_PROD_URL --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_email=$WP_ADMIN_MAIL
 echo 'created admin user for production: '$WP_ADMIN_USER'<'$WP_ADMIN_MAIL'>'
 wp maintenance-mode activate
