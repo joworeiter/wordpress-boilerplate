@@ -121,7 +121,7 @@ ln -s "$assets_path"/uploads contentuploads
 
 
 # Install WordPress without disclosing admin_password to bash history
-cd "$root"/production
+cd "$root"/production || exit 1
 wp core install --url=$WP_PROD_URL --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_email=$WP_ADMIN_MAIL
 echo 'created admin user for production: '$WP_ADMIN_USER'<'$WP_ADMIN_MAIL'>'
 wp maintenance-mode activate
