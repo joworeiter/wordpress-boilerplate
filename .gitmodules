@@ -1,0 +1,4 @@
+[submodule "wordpress-boilerplate"]
+	path = wordpress-boilerplate
+	url = git@github.com:joworeiter/wordpress-boilerplate.git
+	branch = bin-only
