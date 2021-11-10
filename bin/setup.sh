@@ -16,7 +16,6 @@ then
     exit 1
 fi
 
-exit
 if [ -f $env_file ]
 then
   source $env_file
