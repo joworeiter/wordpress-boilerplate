@@ -4,17 +4,22 @@ parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 #get the root dir - the dir where the staging and production directory is located
 root=$(builtin cd "$parent_path"/..; pwd)
 
-overrides_path=../../shared/overrides
-assets_path=../../../shared/assets
+staging_overrides_path="$root"/staging/shared/overrides
+staging_assets_path="$root"/staging/shared/assets
+staging_current="$root"/staging/current
+prod_overrides_path="$root"/production/shared/overrides
+prod_assets_path="$root"/production/shared/assets
+prod_current="$root"/production/current
 
 env_file="$root"/.env
 
-if !command -v wp &> /dev/null
+if ! command -v wp &> /dev/null
 then
     echo "wp-cli is not installed on the system"
     echo "Install wp-cli and comeback"
     exit 1
 fi
+
 
 if [ -f $env_file ]
 then
@@ -25,22 +30,21 @@ then
 fi
 
 # create the staging directories and set proper permissions
-mkdir "$root"/staging
-mkdir -p "$root"/staging/releases/0_init "$root"/staging/shared/assets/uploads "$root"/staging/shared/assets/upgrade "$root"/staging/shared/overrides/
-chmod 0775 "$root"/staging/shared/assets/
+mkdir -p "$root"/staging/releases/0_init "$staging_assets_path"/uploads "$staging_assets_path"/upgrade "$staging_overrides_path"/
+chmod 0775 "$staging_assets_path"
 find . -type f -exec chmod 664 {} +
 ln -s "$root"/staging/releases/0_init "$root"/staging/current
 
 if [ ! -d "$root"/staging/current/wp-admin ]; then
-  wp core download --skip-themes --skip-plugins --locale=$WP_LOCALE
+  wp core download --skip-themes --skip-plugins --locale=$WP_LOCALE --path="$root"/staging/current
 fi
 
 # copy the staging dir for the production env.
-rm wp-config-sample.php
+rm "$root"/staging/current/wp-config-sample.php
 cp "$root"/staging -R "$root"/production
 
 # create wp-config for STAGING
-wp config create --dbname=$WP_STAGING_DB_NAME --dbuser=$WP_STAGING_DB_USER --dbpass=$WP_STAGING_DB_PWD --dbhost=$WP_STAGING_HOST --dbprefix=$WP_STAGING_DB_PREFIX --skip-check --extra-php <<PHP
+wp config create --path="$staging_current" --dbname="$WP_STAGING_DB_NAME" --dbuser="$WP_STAGING_DB_USER" --dbpass="$WP_STAGING_DB_PWD" --dbhost="$WP_STAGING_DB_HOST" --dbprefix="$WP_STAGING_DB_PREFIX" --skip-check --extra-php <<PHP
 /**
  * REITER.WORK customs
  */
@@ -63,28 +67,26 @@ PHP
 
 
 # move the config file into overrides and symlink it
-mv wp-config.php $overrides_path
-ln -s $overrides_path/wp-config.php wp-config.php
+mv "$root"/staging/current/wp-config.php "$staging_overrides_path"/wp-config.php
+ln -s "$staging_overrides_path"/wp-config.php "$root"/staging/current/wp-config.php
+
 
 # set proper permissions for security
-chmod 0600 $overrides_path/wp-config.php
+chmod 0600 "$staging_overrides_path"/wp-config.php
 
 # rename wp-content to content and symlink uploads and upgrade
-mv wp-content content
-ln -s "$assets_path"/upgrade content/upgrade
-ln -s "$assets_path"/uploads content/uploads
-
+mv "$staging_current"/wp-content "$staging_current"/content
+ln -s "$staging_assets_path"/upgrade "$staging_current"/content/upgrade
+ln -s "$staging_assets_path"/uploads "$staging_current"/content/uploads
 
 
 # Install WordPress without disclosing admin_password to bash history
-wp core install --url=$WP_STAGING_URL --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_email=$WP_ADMIN_MAIL
+wp core install --url=$WP_STAGING_URL --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_email=$WP_ADMIN_MAIL --path=$staging_current
 
 echo 'created admin user for staging: '$WP_ADMIN_USER'<'$WP_ADMIN_MAIL'>'
 
-cd "$root"/production/current || exit
-
 # create wp-config for PRODUCTION
-wp config create --dbname=$WP_PROD_DB_NAME --dbuser=$WP_PROD_DB_USER --dbpass=$WP_PROD_DB_PWD --dbhost=$WP_PROD_HOST --dbprefix=$WP_PROD_DB_PREFIX --skip-check --extra-php <<PHP
+wp config create --path=$prod_current --dbname=$WP_PROD_DB_NAME --dbuser=$WP_PROD_DB_USER --dbpass=$WP_PROD_DB_PWD --dbhost=$WP_PROD_DB_HOST --dbprefix=$WP_PROD_DB_PREFIX --skip-check --extra-php <<PHP
 /**
  * REITER.WORK customs
  */
@@ -107,26 +109,18 @@ PHP
 
 
 # move the config file into overrides and symlink it
-mv wp-config.php $overrides_path
-ln -s $overrides_path/wp-config.php wp-config.php
+mv "$prod_current"/wp-config.php "$prod_overrides_path"/wp-config.php
+ln -s "$prod_overrides_path"/wp-config.php "$prod_current"/wp-config.php
 
 # set propper permissions for security
-chmod 0600 $overrides_path/wp-config.php
+chmod 0600 "$prod_overrides_path"/wp-config.php
 
 # rename wp-content to content and symlink uploads and upgrade
-mv wp-content content
-ln -s "$assets_path"/upgrade content/upgrade
-ln -s "$assets_path"/uploads contentuploads
+mv "$prod_current"/wp-content "$prod_current"/content
+ln -s "$prod_assets_path"/upgrade "$prod_current"/content/upgrade
+ln -s "$prod_assets_path"/uploads "$prod_current"/content/uploads
 
 
 # Install WordPress without disclosing admin_password to bash history
-cd "$root"/production || exit 1
-wp core install --url=$WP_PROD_URL --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_email=$WP_ADMIN_MAIL
 echo 'created admin user for production: '$WP_ADMIN_USER'<'$WP_ADMIN_MAIL'>'
-wp maintenance-mode activate
-
-
-
-
-
-
+wp --path=$prod_current maintenance-mode activate
