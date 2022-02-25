@@ -19,20 +19,41 @@
     {% set size2x = size * 2 %}
     {% set height2x = height * 2 %}
 
-    <picture>
-        {% if height %}
-            <source srcset="{{ src | resize(size, height) | towebp }}" type="image/webp"/>
-            <source srcset="{{ src | resize(size2x, height2x) | towebp }} 2x" type="image/webp"/>
-            <img class="{{ class }}" src="{{ src | resize(size, height) | tojpg }}"
-                 srcset="{{ src | resize(size2x, height2x) | tojpg }} 2x"
-                 alt="{{ alt }}" title="{{ title }}" loading="{{ loading }}"/>
-        {% else %}
-            <source srcset="{{ src | resize(size) | towebp }}" type="image/webp"/>
-            <source srcset="{{ src | resize(size2x) | towebp }} 2x" type="image/webp"/>
-            <img class="{{ class }}" src="{{ src | resize(size) | tojpg }}"
-                 srcset="{{ src | resize(size2x) | tojpg }} 2x"
-                 alt="{{ alt }}" title="{{ title }}" loading="{{ loading }}"/>
-        {% endif %}
-    </picture>
+    {% if img.post_mime_type == 'image/svg' %}
+        <img class="{{ class }}" src="{{ src }}" alt="{{ alt }}" title="{{ title }}" loading="{{ loading }}"/>
+    {% elseif img.post_mime_type == 'image/png' %}
+        <picture>
+            {% if height %}
+                <source srcset="{{ src | resize(size, height) | towebp }}" type="image/webp"/>
+                <source srcset="{{ src | resize(size2x, height2x) | towebp }} 2x" type="image/webp"/>
+                <img class="{{ class }}" src="{{ src | resize(size, height) }}"
+                     srcset="{{ src | resize(size2x, height2x) }} 2x"
+                     alt="{{ alt }}" title="{{ title }}" loading="{{ loading }}"/>
+            {% else %}
+                <source srcset="{{ src | resize(size) | towebp }}" type="image/webp"/>
+                <source srcset="{{ src | resize(size2x) | towebp }} 2x" type="image/webp"/>
+                <img class="{{ class }}" src="{{ src | resize(size) | tojpg }}"
+                     srcset="{{ src | resize(size2x) | tojpg }} 2x"
+                     alt="{{ alt }}" title="{{ title }}" loading="{{ loading }}"/>
+            {% endif %}
+        </picture>
+    {% else %}
+        <picture>
+            {% if height %}
+                <source srcset="{{ src | resize(size, height) | towebp }}" type="image/webp"/>
+                <source srcset="{{ src | resize(size2x, height2x) | towebp }} 2x" type="image/webp"/>
+                <img class="{{ class }}" src="{{ src | resize(size, height) | tojpg }}"
+                     srcset="{{ src | resize(size2x, height2x) | tojpg }} 2x"
+                     alt="{{ alt }}" title="{{ title }}" loading="{{ loading }}"/>
+            {% else %}
+                <source srcset="{{ src | resize(size) | towebp }}" type="image/webp"/>
+                <source srcset="{{ src | resize(size2x) | towebp }} 2x" type="image/webp"/>
+                <img class="{{ class }}" src="{{ src | resize(size) | tojpg }}"
+                     srcset="{{ src | resize(size2x) | tojpg }} 2x"
+                     alt="{{ alt }}" title="{{ title }}" loading="{{ loading }}"/>
+            {% endif %}
+        </picture>
+    {% endif %}
+
 
 {% endblock %}
