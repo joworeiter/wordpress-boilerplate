@@ -6,7 +6,7 @@ use Timber\Term;
 use Timber\Image;
 
 
-add_filter('allowed_block_types', 'custom_allowed_block_types');
+add_filter('allowed_block_types_all', 'custom_allowed_block_types');
 
 function custom_allowed_block_types($allowed_blocks)
 {
