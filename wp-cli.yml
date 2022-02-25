@@ -1,0 +1,3 @@
+path: app/site
+apache_modules:
+  - mod_rewrite

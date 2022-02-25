@@ -18,7 +18,7 @@ if [ -f $env_file ]; then
   source $env_file
 else
   echo 'no .env-File found in the root directory. You need to provide one'
-  exit
+  exit 1
 fi
 
 
@@ -28,7 +28,6 @@ shared_dir_path="$parent_path"/../shared
 
 # create the staging directories and set proper permissions
 mkdir -p ../app/site
-
 
 if [ ! -d "$current_dir_path"/wp-admin ]; then
    wp core download --skip-content --locale=$WP_LOCALE --path="$current_dir_path"
@@ -52,4 +51,4 @@ ln -s "$root"/boilerplate "$current_dir_path"/content/themes/"$THEME_NAME"
 
 
 wp plugin install wps-hide-login --path="$current_dir_path"
-wp plugin install "http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=$ACF_PRO_KEY"
+wp plugin install "http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=$ACF_PRO_KEY" --path="$current_dir_path"
