@@ -29,10 +29,21 @@ function custom_allowed_block_types($allowed_blocks)
 
 }
 
+
+add_filter('timber/context', 'add_to_context');
+function add_to_context($context)
+{
+    // Now, in similar fashion, you add a Timber Menu and send it along to the context.
+    $context['menu'] = new \Timber\Menu('Hauptmenü');
+    $context['footerMenu'] = new \Timber\Menu('Footer');
+    $custom_logo_url = new Image(get_theme_mod( 'custom_logo' ));
+    $context['logo'] = $custom_logo_url;
+    return $context;
+}
+
+
 add_filter('timber/acf-gutenberg-blocks-data/contact-information-box', function ($context) {
-
     $context['expert'] = new Post($context['fields']['staff']);
-
     return $context;
 });
 
@@ -43,13 +54,6 @@ add_filter('timber/acf-gutenberg-blocks-data/staff', function ($context) {
     return $context;
 });
 
-add_filter('timber/context', 'add_to_context');
-function add_to_context($context)
-{
-    // Now, in similar fashion, you add a Timber Menu and send it along to the context.
-    $context['menu'] = new \Timber\Menu('Hauptmenü');
-    return $context;
-}
 
 add_filter('timber/acf-gutenberg-blocks-data/downloads', function ($context) {
 
