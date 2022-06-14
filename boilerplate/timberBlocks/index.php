@@ -33,11 +33,15 @@ function custom_allowed_block_types($allowed_blocks)
 add_filter('timber/context', 'add_to_context');
 function add_to_context($context)
 {
-    // Now, in similar fashion, you add a Timber Menu and send it along to the context.
-    $context['menu'] = new \Timber\Menu('Hauptmenü');
-    $context['footerMenu'] = new \Timber\Menu('Footer');
+
+    $menus = get_registered_nav_menus();
+    foreach($menus as $index => $menu) {
+        $context['menus'][$menu] = new \Timber\Menu($index);
+    }
+
     $custom_logo_url = new Image(get_theme_mod( 'custom_logo' ));
     $context['logo'] = $custom_logo_url;
+
     return $context;
 }
 
