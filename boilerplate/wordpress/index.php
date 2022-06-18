@@ -3,6 +3,7 @@
 require_once __DIR__ . '/customLogin/customLogin.php';
 require_once __DIR__ . '/displayUserLastLogin/index.php';
 require_once __DIR__ . '/removeHeaderScripts/index.php';
+require_once __DIR__ . '/optionsPage/index.php';
 
 //enable svg uploads
 function cc_mime_types($mimes) {
