@@ -7,10 +7,12 @@
 */
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-    $_SERVER['HTTP_HOST'] = $_SERVER['SERVER_NAME'];
+    $_SERVER['HTTP_HOST'] = $_SERVER['SERVER_NAME'] = '';
 }
 
 define( 'WP_DEBUG_LOG', true );
+define('WP_DEBUG', false);
+define('WP_DEBUG_DISPLAY', true);
 define( 'RW_WP_ROOT_DIR', dirname(__FILE__, 3) . '/app/site');
 define( 'RW_WP_ROOT_URL', 'https://' . $_SERVER['HTTP_HOST']);
 define( 'WP_CONTENT_DIR', RW_WP_ROOT_DIR . '/content' );
@@ -23,7 +25,7 @@ define( 'WP_AUTO_UPDATE_CORE', false );
 define('WPLANG', 'de_AT');
 
 /** WP_HOME URL */
-define('WP_HOME', 'https://wohlbekannt-2022.ddev.site');
-
-/** WP_SITEURL location */
+define('WP_HOME', $_ENV['WP_HOME']);
+//
+///** WP_SITEURL location */
 define('WP_SITEURL', WP_HOME . '/');

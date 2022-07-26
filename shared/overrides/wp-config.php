@@ -19,6 +19,13 @@
  * @package WordPress
  */
 
+
+/** @desc this loads the composer autoload file */
+require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
+/** @desc this instantiates Dotenv and passes in our path to .env */
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2));
+$dotenv->load();
+
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'db' );
@@ -30,7 +37,7 @@ define( 'DB_USER', 'db' );
 define( 'DB_PASSWORD', 'db' );
 
 /** Database hostname */
-define( 'DB_HOST', 'ddev-wohlbekannt-2022-db:3306' );
+define( 'DB_HOST', 'ddev-atract-db:3306' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -49,15 +56,15 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',          '<sH``?t)a5[:C]> ;<*Ph+Tj8N,<sM`cc[~Bk5pTJ[uo9q-@^,{,s#d?,n%-7-hx' );
-define( 'SECURE_AUTH_KEY',   'J>,.{Rn)@]+&N{k$==@ovC*3<x~,f|WV3raw!x;^?=ql!W<IvMbc}*a K|n!^5_p' );
-define( 'LOGGED_IN_KEY',     'XS1-(jGw,x(^&[H;`WqZRy-~[p*Z0M<<swp[[M;JaedCqz%u|1B>g_bb|Js!`! V' );
-define( 'NONCE_KEY',         'e2YmJyqN <cJeTn3{/Q9S;nB)uP[;(kp+!9|N|-?~R]#ns0,+P)_=ER ].d|+WC<' );
-define( 'AUTH_SALT',         'Yx)C97aKD+pEP6~%n88F#Ll{eNNKa_H 4/R~QSh}/wexC&l`8`pJc{?aFGi+JA~ ' );
-define( 'SECURE_AUTH_SALT',  '|*!TUvqqAm` vFLg4k#%yFa;Q:Sl+VF*4LaH&BT3;L-^z@/aS7O])9n{p2fP(Sx6' );
-define( 'LOGGED_IN_SALT',    '-y~SP|u9C8=|<s0k-6x{x7b3!x].>,}>2N)/JkEJ++B.qpKVCXP@f_qjip+oIP7s' );
-define( 'NONCE_SALT',        'B=qa a@InyIjvuJQlP!~x/XM 9u?2c_K__pu,sm$%7[Jp`7_*7wTswEPBH~S=PoJ' );
-define( 'WP_CACHE_KEY_SALT', 'K>EGWXA l*xH}<uW%q<TS/2tFBXTYf4JS5W6[5a%hsBRqJH2ep#B[=tD]d]- JM]' );
+define( 'AUTH_KEY',          '9%,r01ZBab-$P9II1.NCbu?~;bG%Fu$:`( piZ/p?!9Yv?)cy[73T-e(tSvJX:YC' );
+define( 'SECURE_AUTH_KEY',   'H6r@abMHYASQLrT_p5kYZS :f5~XDB+$124?}Pi$k2aLvw25QF29H}YTzAtsAdG<' );
+define( 'LOGGED_IN_KEY',     '%B[y)NX0%oaz$r`;_xh)yJp%%oZd-H^RA)4.*);CP!9&R1eL#q9XhDqW{GVO@,Ry' );
+define( 'NONCE_KEY',         'F;)g^MFF#m^LzN}m/V3elWb)6xBJd}7pY*n%w%[7Mdl6ehWfgGlKNTr}<9LW6UO&' );
+define( 'AUTH_SALT',         'XpsS@H[hh4ta:h7y`jm8*vM`QKAMArW}O!8~9)zX2GHm+=m-t+P?jU_)v%:s4QY>' );
+define( 'SECURE_AUTH_SALT',  '?fL+Osm]U;JwH2sMHl6lERUe2D[%=)NSPT(?@|QGM-3`$DYjq%AU}BCG_X-~fTi1' );
+define( 'LOGGED_IN_SALT',    'FQ>HE6nU<Hj-8A)A7>)KpCk6bRYj1pAI4z0/f$U-c?aBN8n~~jjg]iX+f,W$H4#v' );
+define( 'NONCE_SALT',        'MGlY<,5c+r@n8`caTNc rC*io+f.[0[=;]wj2]?$vS=VFJX)l@d*(^Zw.?#z9=&F' );
+define( 'WP_CACHE_KEY_SALT', 'oG+G-dY$:-+.bD8bUuBGw xsF/vd~V(/[-a2IV&yihiCGvKh,s>IB}VmQ-eyDY/p' );
 
 
 /**#@-*/
@@ -82,10 +89,13 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', true );
+
+/* Add any custom values between this line and the "stop editing" line. */
+/**
+ * REITER.WORK customs
+ */
 
 require_once (__DIR__ . '/wp-config-rw.php');
-
 
 /* That's all, stop editing! Happy publishing. */
 

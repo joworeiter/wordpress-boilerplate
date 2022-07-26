@@ -73,7 +73,7 @@ mv "$root"/staging/current/wp-config.php "$staging_overrides_path"/wp-config.php
 ln -s "$staging_overrides_path"/wp-config.php "$root"/staging/current/wp-config.php
 
 # set proper permissions for security
-chmod 0400 "$staging_overrides_path"/wp-config.php
+chmod 0600 "$staging_overrides_path"/wp-config.php
 
 # rename wp-content to content and symlink uploads and upgrade
 mv "$staging_current"/wp-content "$staging_current"/content
@@ -114,7 +114,7 @@ PHP
   ln -s "$prod_overrides_path"/wp-config.php "$prod_current"/wp-config.php
 
   # set propper permissions for security
-  chmod 0400 "$prod_overrides_path"/wp-config.php
+  chmod 0600 "$prod_overrides_path"/wp-config.php
 
   # rename wp-content to content and symlink uploads and upgrade
   mv "$prod_current"/wp-content "$prod_current"/content

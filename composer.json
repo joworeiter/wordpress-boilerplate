@@ -1,0 +1,11 @@
+{
+  "require": {
+    "vlucas/phpdotenv": "^5.4"
+  },
+  "preserve-paths": [
+    "app/site/robots.txt",
+    "app/site/wp-config.php",
+    "app/site/content/themes/",
+    "app/site/content/plugins/"
+  ]
+}

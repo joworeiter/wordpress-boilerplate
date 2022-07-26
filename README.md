@@ -1,9 +1,15 @@
-# WordPress Boilerplate Project
+# Atract relaunch
 
 - Author: Johannes Reiter 
 - Contact: [send me a message](johannes@reiter.work)
+- local URL: https://atract.ddev.site/schaltzentrale
+- staging URL: atract.reiter.work/schaltzentrale
+  - atract
+  - atract1
+- Production: atract.at
 
 ## Basic Usage
+
 
 
 ### setup.sh

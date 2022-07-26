@@ -16,7 +16,14 @@
 /app/site/wp-signup.php
 /app/site/wp-trackback.php
 /app/site/xmlrpc.php
-!/app/site/content/
+/app/site/content/plugins
+/app/site/content/cache
+/app/site/content/uploads
+/app/site/content/upgrade
+theme/assets/dist
+
 
 **/vendor
+!theme/assets/src/scss/vendor
 **/node_modules
+/shared/assets/*

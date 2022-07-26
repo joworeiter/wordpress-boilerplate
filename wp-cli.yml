@@ -1,3 +1,15 @@
 path: app/site
 apache_modules:
   - mod_rewrite
+
+# Aliases to other WordPress installs (e.g. `wp @staging rewrite flush`)
+# An alias can include 'user', 'url', 'path', 'ssh', or 'http'
+@staging:
+   ssh: ssh-w01cdde5@w019571c.kasserver.com
+   user: wpcli
+   path: /www/htdocs/w01cdde5/atract.at/staging/current
+
+@production:
+   ssh: ssh-w01cdde5@w019571c.kasserver.com
+   user: wpcli
+   path: /www/htdocs/w01cdde5/atract.at/production/current
