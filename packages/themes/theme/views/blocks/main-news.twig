@@ -1,0 +1,34 @@
+{#
+Title: Main News
+Description: Stellt einen ausgewählten Newsbeitrag dar
+Category: media
+Icon: format-aside
+PostTypes: page
+Keywords: news header
+Mode: edit
+align: false
+#}
+
+<div class="{{ classes }}" data-{{ block.id }}>
+    <div class="row">
+        <div class="main-news__background d-none d-md-block">
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row main-news__row">
+            <div class="col-12 col-md-4 main-news__text">
+                <h2>{{ post.post_title }}</h2>
+                <div>
+                    {{ post.post_excerpt|default( post.get_content(25)) }}
+                </div>
+                <a href="{{ post.link }}" class="btn btn-primary mt-4">mehr erfahren</a>
+            </div>
+            <div class="col-12 col-md-8 main-news__img">
+                {% set img = post.get_image('post-image') %}
+                {% include 'utils/image.twig' with {src: img.src, size: 800, alt: img.alt, title: img.title} %}
+            </div>
+        </div>
+    </div>
+</div>

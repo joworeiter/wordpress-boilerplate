@@ -1,0 +1,36 @@
+{% block header_nav %}
+    <nav>
+        <ul class="nav">
+            {% for menuItem in menu.get_items %}
+                <li class="nav__item">
+
+                    {% if menuItem.children is empty %}
+
+                        <a class="{{ (menuItem.current_item_parent or menuItem.current) ? 'active' : '' }}"
+                           href="{{ menuItem.link }}">{{ menuItem.title }} </a>
+
+                    {% else %}
+                        <label for="{{ menuItem.title }}">
+
+                            <span class="nav__item_label {{ (menuItem.current_item_parent or menuItem.current) ? 'active' : '' }}">
+                                 {{ menuItem.title }}
+                            </span>
+
+                        </label>
+                        <input type="checkbox" id="{{ menuItem.title }}">
+                        <ul class="nav__lvl2">
+                            {% for child in menuItem.children %}
+                                <li class="nav__item nav__item--lvl2">
+                                    <a class="{{ child.current ? 'active' : '' }}"
+                                       href="{{ child.url }}">
+                                        {{ child.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+{% endblock %}

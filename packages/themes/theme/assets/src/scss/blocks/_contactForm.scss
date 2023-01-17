@@ -1,0 +1,71 @@
+.contact-form{
+  position: relative;
+}
+
+.form {
+
+  position: relative;
+
+  &__container {
+    background-color: $primary;
+    padding: 1rem 2rem;
+    margin: 2rem 0;
+
+    &--orange {
+      background-color: $secondary;
+      color: $white;
+      padding: 2rem;
+      margin-bottom: -3rem;
+    }
+  }
+
+  &__copy {
+    margin-bottom: 2rem;
+  }
+
+  input:not(input[type=submit]), textarea {
+    color: $white;
+    width: 100%;
+    background: transparent;
+    border-color: white;
+    border-style: solid;
+    border-width: 0 0 2px;
+    height: 2rem;
+
+  }
+
+  textarea {
+    height: 6rem;
+  }
+
+  input[type=submit] {
+    min-width: 200px;
+    text-align: center;
+  }
+
+  label {
+    font-family: $font-family-sans-serif;
+    font-size: $font-size-sm;
+    width: 100%;
+  }
+
+  &__background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22rem;
+    color: $white;
+    font-family: $font-family-sans-serif;
+
+    --size: 40vh;
+    border-radius: 50%;
+    position: absolute;
+    top: 2rem;
+    --bigSize: calc(var(--size) * 1.25);
+    background-color: #0099CB;
+    height: var(--bigSize);
+    width: var(--bigSize);
+    right: -5rem;
+  }
+
+}

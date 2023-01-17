@@ -1,0 +1,136 @@
+{% extends 'layouts/base.twig' %}
+
+{% block blog_content_wrapper %}
+
+    {% block content %}
+        <div class="row">
+            <div class="main-news__background d-none d-md-block">
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row main-news__row mb-4">
+                <div class="col-12 col-md-4 main-news__text">
+                    <h2>{{ post.post_title }}</h2>
+                    <div>
+                        {{ post.post_excerpt|default( post.get_content(25)) }}
+                    </div>
+                    <a href="{{ post.guid }}" class="btn btn-primary mt-4">mehr erfahren</a>
+                </div>
+                <div class="col-12 col-md-8 main-news__img">
+                    <img src="{{ post.get_image('post-image').src | resize(800) | towebp }}">
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="blog">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active blog__btn"
+                                        id="pills-all-tab"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#pills-all" type="button" role="tab"
+                                        aria-controls="pills-all"
+                                        aria-selected="true">Alle
+                                </button>
+                            </li>
+                            {% for term in terms %}
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link blog__btn"
+                                            id="pills-{{ term.name }}-tab"
+                                            data-bs-toggle="pill"
+                                            data-bs-target="#pills-{{ term.name }}" type="button" role="tab"
+                                            aria-controls="pills-{{ term.name }}"
+                                            aria-selected="false">{{ term.name }}
+                                    </button>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="tab-content" id="pills-tabContent">
+
+                        <div class="tab-pane fade show active"
+                             id="pills-all"
+                             role="tabpanel"
+                             aria-labelledby="pills-all-tab">
+                            <div class="blog__container">
+                                {% for term in terms %}
+                                    {% for post in term.get_posts %}
+                                        <div class="blog__card">
+                                            <div class="news-teaser__img-wrapper">
+                                                {% set img = post.get_image('post-image') %}
+                                                <img src="{{ img.src | resize(600) | towebp }}" alt="{{ img.alt }}"
+                                                     title="{{ img.title }}">
+                                            </div>
+                                            <div class="news-teaser__content">
+                                                <h3>
+                                                    {{ post.post_title }}
+                                                </h3>
+                                                <p>{{ post.post_excerpt|default( post.get_content(25)) }}</p>
+
+                                            </div>
+                                            <a href="{{ post.link }}" class="btn btn-primary news-teaser__btn">mehr
+                                                erfahren</a>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        {% for term in terms %}
+                            <div class="tab-pane fade"
+                                 id="pills-{{ term.name }}"
+                                 role="tabpanel"
+                                 aria-labelledby="pills-{{ term.name }}-tab">
+                                <div class="blog__container">
+
+                                    {% for post in term.get_posts %}
+                                        <div class="blog__card">
+                                            <div class="news-teaser__img-wrapper">
+                                                {% set img = post.get_image('post-image') %}
+                                                <img src="{{ img.src | resize(600) | towebp }}" alt="{{ img.alt }}"
+                                                     title="{{ img.title }}">
+                                            </div>
+                                            <div class="news-teaser__content">
+                                                <h3>
+                                                    {{ post.post_title }}
+                                                </h3>
+                                                <p>{{ post.post_excerpt|default( post.get_content(25)) }}</p>
+
+                                            </div>
+                                            <a href="{{ post.link }}" class="btn btn-primary news-teaser__btn">mehr
+                                                erfahren</a>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="staff__background--gray mb-0 blog__contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="staff__headline">Du hast noch Fragen?</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {% include './blocks/contact-form.twig' %}
+
+
+    {% endblock %}
+
+{% endblock %}
