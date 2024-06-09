@@ -1,0 +1,13 @@
+#!/bin/bash
+
+## Description: get the staging db and import it to local via wp-cli
+## Usage: pull-production
+## Example: "ddev pull-staging"
+## ExecRaw: true
+## HostWorkingDir: true
+
+echo -e "\n \nBitte URL unter .ddev/commands/web/wp anpassen!"
+exit 1;
+
+wp @production db export - | wp db import -
+wp search-replace "https://www.bestattung-eder.com" "${DDEV_PRIMARY_URL}"

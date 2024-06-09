@@ -1,0 +1,27 @@
+#// Configure your staging site
+
+config:
+  keep_releases: 3
+
+hosts:
+  staging:
+    remote_user: bestae
+    hostname: dediXXXX.your-server.de
+    port: 222
+    stage: staging
+    branch: staging
+    user: localhost
+    identityFile: ~
+    writable_mode: skip
+    deploy_path: /usr/home/bestae/public_html/staging/
+
+  #// Configure your WordPRess production site
+  production:
+    remote_user: bestae
+    hostname: dediXXXX.your-server.de
+    port: 222
+    stage: production
+    branch: production
+    user: localhost
+    identityFile: ~
+    deploy_path: /usr/home/bestahue/public_html/

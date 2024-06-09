@@ -1,0 +1,24 @@
+path: web/wp
+server:
+  docroot: web
+apache_modules:
+  - mod_rewrite
+require:
+   - wp-cli.pre-ssh.php
+
+# Aliases to other WordPress installs (e.g. `wp @staging rewrite flush`)
+# An alias can include 'user', 'url', 'path', 'ssh', or 'http'
+@staging:
+   ssh:
+   user: wpcli
+   path: /www/htdocs/w01bda3d/wohlbekannt.at/staging/current/web/wp
+
+@production:
+   ssh: epserver@dedivirt592.your-server.de:222
+   user: wpcli
+   path: /usr/home/epserver/public_html/sandbox/johannes
+
+@boilerplate:
+   ssh: ssh-w01bda3d@w019571c.kasserver.com
+   user: wpcli
+   path: /www/htdocs/w01bda3d/wohlbekannt.at/production/current/web/wp
